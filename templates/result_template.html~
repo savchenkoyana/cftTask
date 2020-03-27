@@ -1,0 +1,10 @@
+<!doctype html>
+<html>
+ <head>
+  <title>Resulting Image</title>
+ </head>
+ <body>
+  <h1>{{ image_title }}</h1>
+   <img src={{ image_name }} alt="Mountains" width="600" height="400"> 
+ </body>
+</html>
