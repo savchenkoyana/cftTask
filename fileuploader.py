@@ -32,6 +32,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file', filename=filename))
+            #return uploaded_file(filename)
         else:
             flash('Invalid type')
     return render_template('upload_template.html')
@@ -43,17 +44,19 @@ def plot_from_mp3(D):
     plt.title('Power spectrogram')
     plt.colorbar(format='%+2.0f dB')
     plt.tight_layout()
-    plt.show()
-    plt.savefig(UPLOAD_FOLDER+"temp.png")
-    plt = Image.open(UPLOAD_FOLDER+"temp.png")
-    return plt
+    plt.savefig(UPLOAD_FOLDER+"/temp.png")
+    #plot = Image.open(UPLOAD_FOLDER+"/temp.png")
+    return "temp.png"
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     #MyFile = UPLOAD_FOLDER + filename
     y, sr = librosa.load(librosa.util.example_audio_file())
-    D = np.abs(librosa.stft(y))
-    return render_template('result_template.html', image_title="LOL", image_name=plot_from_mp3(D))
+    D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
+    #return render_template('result_template.html', image_title="LOL", image_name=plot_from_mp3(D))
+    #return render_template('result_template.html', image_title="LOL", \
+    #       image_name=send_from_directory(app.config['UPLOAD_FOLDER'],plot_from_mp3(D)))
+    return send_from_directory(app.config['UPLOAD_FOLDER'], plot_from_mp3(D))
 #send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
