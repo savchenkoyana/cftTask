@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
  <head>
-  <title>Resulting Image</title>
+  <title>Frequency spectrum image</title>
  </head>
  <body>
-  <h1>{{ image_title }}</h1>
-   <img src={{ image_name }} alt="Mountains" width="600" height="400"> 
+  <p>Frequency spectrum image for file {{ mp3_title }}</p>
+   <img src={{ image_name }} width="600" height="400"> 
  </body>
 </html>
