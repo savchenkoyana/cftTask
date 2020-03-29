@@ -1,6 +1,6 @@
 # cftTask
 
-This is [my project](http://cft-task.herokuapp.com/)
+[This](http://cft-task.herokuapp.com/) is my project
 
 I use these buildpacks:
 - `heroku/python`
